@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Gun : MonoBehaviour {
     [SerializeField]
@@ -21,6 +22,8 @@ public class Gun : MonoBehaviour {
     private LayerMask Mask;
     [SerializeField]
     private float BulletSpeed = 100;
+    [SerializeField]
+    Camera camera;
 
     private Animator Animator;
     private float LastShootTime;
@@ -37,8 +40,11 @@ public class Gun : MonoBehaviour {
           // Animator.SetBool("New Bool", true);
             ShootingSystem.Play();
             Vector3 direction = GetDirection();
+            if (Physics.Raycast(camera.transform.position, direction, out RaycastHit hit, float.MaxValue, Mask)) {
 
-            if (Physics.Raycast(BulletSpawnPoint.position, direction, out RaycastHit hit, float.MaxValue, Mask)) {
+                Vector3 gunRotate = hit.point - transform.position;
+                BulletSpawnPoint.transform.rotation = Quaternion.LookRotation(gunRotate);
+
                 TrailRenderer trail = Instantiate(BulletTrail, BulletSpawnPoint.position, Quaternion.identity);
 
                 StartCoroutine(SpawnTrail(trail, hit.point, hit.normal, true));
@@ -57,7 +63,7 @@ public class Gun : MonoBehaviour {
     }
 
     private Vector3 GetDirection() {
-        Vector3 direction = transform.forward;
+        Vector3 direction = camera.transform.forward;
 
         if (AddBulletSpread) {
             direction += new Vector3(
