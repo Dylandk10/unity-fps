@@ -13,6 +13,7 @@ namespace StarterAssets
 		public bool jump;
 		public bool sprint;
 		public bool shoot;
+		public bool switchShield;
 
 		[Header("Movement Settings")]
 		public bool analogMovement;
@@ -48,6 +49,10 @@ namespace StarterAssets
 		public void OnShoot(InputValue value) {
 			ShootInput(value.isPressed);
 		}
+
+		public void OnSwitchShield(InputValue value) {
+			ShieldInput(value.isPressed);
+		}
 #endif
 
 
@@ -78,6 +83,10 @@ namespace StarterAssets
 		private void OnApplicationFocus(bool hasFocus)
 		{
 			SetCursorState(cursorLocked);
+		}
+
+		private void ShieldInput(bool Shield) {
+			switchShield = Shield;
 		}
 
 		private void SetCursorState(bool newState)

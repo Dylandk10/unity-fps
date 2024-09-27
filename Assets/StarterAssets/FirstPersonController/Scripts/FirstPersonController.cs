@@ -16,6 +16,13 @@ namespace StarterAssets
 		[SerializeField]
 		Gun gun;
 
+
+		//varibales for shield
+		[SerializeField]
+		public GameObject[] shields;
+		private int activeShieldIndex;
+		private string activeShieldName;
+
 		[Header("Player")]
 		[Tooltip("Move speed of the character in m/s")]
 		public float MoveSpeed = 4.0f;
@@ -113,6 +120,7 @@ namespace StarterAssets
 			// reset our timeouts on start
 			_jumpTimeoutDelta = JumpTimeout;
 			_fallTimeoutDelta = FallTimeout;
+			activeShieldIndex = 0;
 		}
 
 		private void Update()
@@ -121,6 +129,7 @@ namespace StarterAssets
 			GroundedCheck();
 			Move();
 			Shoot();
+			SwitchShield();
 		}
 
 		private void LateUpdate()
@@ -258,6 +267,23 @@ namespace StarterAssets
 				gun.Shoot();
 			}
             _input.shoot = false;
+        }
+
+		private void SwitchShield() {
+			if (_input.switchShield) {
+				activeShieldIndex += 1;
+				if (activeShieldIndex >= shields.Length) activeShieldIndex = 0;
+				for (int i = 0; i < shields.Length; i++) {
+					if (i == activeShieldIndex) {
+						shields[i].SetActive(true);
+						activeShieldName = shields[i].name;
+					}
+					else {
+						shields[i].SetActive(false);
+					}
+				}
+			}
+            _input.switchShield = false;
         }
 
 

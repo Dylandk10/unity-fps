@@ -21,9 +21,9 @@ public class Gun : MonoBehaviour {
     [SerializeField]
     private LayerMask Mask;
     [SerializeField]
-    private float BulletSpeed = 100;
+    private float BulletSpeed = 100f;
     [SerializeField]
-    Camera camera;
+    private Camera camera;
 
     private Animator Animator;
     private float LastShootTime;
@@ -34,14 +34,12 @@ public class Gun : MonoBehaviour {
 
     public void Shoot() {
         if (LastShootTime + ShootDelay < Time.time) {
-            // Use an object pool instead for these! To keep this tutorial focused, we'll skip implementing one.
-            // For more details you can see: https://youtu.be/fsDE_mO4RZM or if using Unity 2021+: https://youtu.be/zyzqA_CPz2E
 
           // Animator.SetBool("New Bool", true);
             ShootingSystem.Play();
             Vector3 direction = GetDirection();
             if (Physics.Raycast(camera.transform.position, direction, out RaycastHit hit, float.MaxValue, Mask)) {
-
+                Debug.Log(hit.collider.name);
                 Vector3 gunRotate = hit.point - transform.position;
                 BulletSpawnPoint.transform.rotation = Quaternion.LookRotation(gunRotate);
 
