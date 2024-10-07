@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using StarterAssets;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -28,18 +29,39 @@ public class Gun : MonoBehaviour {
     private Animator Animator;
     private float LastShootTime;
 
+    //magazine sizes
+    private int maxAmmo = 100;
+    private int currentAmmo;
+
+    //singleton instance
+    public static Gun Instance { get; private set; }
+
     private void Awake() {
-      // Animator = GetComponent<Animator>();
+        // Animator = GetComponent<Animator>();
+
+        // If there is an instance, and it's not me, delete myself.
+        if (Instance != null && Instance != this) {
+            Destroy(this);
+        }
+        else {
+            Instance = this;
+        }
+    }
+
+    private void Start() {
+        currentAmmo = maxAmmo;
     }
 
     public void Shoot() {
         if (LastShootTime + ShootDelay < Time.time) {
+            //if no ammo return
+            if (currentAmmo <= 0) { return; }
 
           // Animator.SetBool("New Bool", true);
             ShootingSystem.Play();
             Vector3 direction = GetDirection();
             if (Physics.Raycast(camera.transform.position, direction, out RaycastHit hit, float.MaxValue, Mask)) {
-                Debug.Log(hit.collider.name);
+              
                 Vector3 gunRotate = hit.point - transform.position;
                 BulletSpawnPoint.transform.rotation = Quaternion.LookRotation(gunRotate);
 
@@ -57,6 +79,8 @@ public class Gun : MonoBehaviour {
 
                 LastShootTime = Time.time;
             }
+            //reduce ammo count
+            currentAmmo -= 1;
         }
     }
 
@@ -97,5 +121,18 @@ public class Gun : MonoBehaviour {
         }
 
         Destroy(Trail.gameObject, Trail.time);
+    }
+
+
+    public string GetCurrentAmmo() {
+        return currentAmmo.ToString();
+    }
+
+    public int GetCurrentAmmoInt() {
+        return currentAmmo;
+    }
+
+    public string GetMaxAmmo() { 
+        return maxAmmo.ToString(); 
     }
 }
