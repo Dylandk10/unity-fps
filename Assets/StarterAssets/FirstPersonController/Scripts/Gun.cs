@@ -33,19 +33,15 @@ public class Gun : MonoBehaviour {
     private int maxAmmo = 100;
     private int currentAmmo;
 
-    //singleton instance
-    public static Gun Instance { get; private set; }
+
+    //sfx
+    private AudioSource gunShotAudio;
+    private float[] pitchArray = { 0.85f, 0.95f, 1.01f, 1.15f };
 
     private void Awake() {
         // Animator = GetComponent<Animator>();
 
-        // If there is an instance, and it's not me, delete myself.
-        if (Instance != null && Instance != this) {
-            Destroy(this);
-        }
-        else {
-            Instance = this;
-        }
+        gunShotAudio = GetComponent<AudioSource>();
     }
 
     private void Start() {
@@ -57,7 +53,8 @@ public class Gun : MonoBehaviour {
             //if no ammo return
             if (currentAmmo <= 0) { return; }
 
-          // Animator.SetBool("New Bool", true);
+            // Animator.SetBool("New Bool", true);
+            StartGunAudio();
             ShootingSystem.Play();
             Vector3 direction = GetDirection();
             if (Physics.Raycast(camera.transform.position, direction, out RaycastHit hit, float.MaxValue, Mask)) {
@@ -79,6 +76,7 @@ public class Gun : MonoBehaviour {
 
                 LastShootTime = Time.time;
             }
+            
             //reduce ammo count
             currentAmmo -= 1;
         }
@@ -121,6 +119,12 @@ public class Gun : MonoBehaviour {
         }
 
         Destroy(Trail.gameObject, Trail.time);
+    }
+
+    private void StartGunAudio() {
+        int randomPitch = Random.Range(0, pitchArray.Length);
+        gunShotAudio.pitch = pitchArray[randomPitch];
+        gunShotAudio.PlayOneShot(gunShotAudio.clip);
     }
 
 

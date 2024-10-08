@@ -76,6 +76,9 @@ namespace StarterAssets
 		private float _jumpTimeoutDelta;
 		private float _fallTimeoutDelta;
 
+		//singleton for instance
+		public static FirstPersonController Instance { get; private set; }
+
 
 #if ENABLE_INPUT_SYSTEM
         private PlayerInput _playerInput;
@@ -105,6 +108,14 @@ namespace StarterAssets
 			{
 				_mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
 			}
+
+            // If there is an instance, and it's not me, delete myself.
+            if (Instance != null && Instance != this) {
+                Destroy(this);
+            }
+            else {
+                Instance = this;
+            }
         }
 
 		private void Start()
@@ -285,6 +296,8 @@ namespace StarterAssets
 			}
             _input.switchShield = false;
         }
+
+		public Gun GetGun() { return gun; }
 
 
 		private static float ClampAngle(float lfAngle, float lfMin, float lfMax)

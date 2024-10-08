@@ -20,7 +20,7 @@ Material:
   - _ALPHABLEND_ON
   - _FLIPBOOKBLENDING_OFF
   - _USE_GRADIENT_ON
-  m_LightmapFlags: 0
+  m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 1
   m_CustomRenderQueue: 3000
@@ -117,7 +117,7 @@ Material:
     - _ColorAddSubDiff: {r: 0, g: 0, b: 0, a: 0}
     - _EdgeColor1: {r: 1, g: 1, b: 1, a: 1}
     - _Emission: {r: 0, g: 0, b: 0, a: 0}
-    - _EmissionColor: {r: 15.999998, g: 9.465967, b: 0, a: 1}
+    - _EmissionColor: {r: 15.999998, g: 11.739296, b: 0, a: 1}
     - _SoftParticleFadeParams: {r: 0, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &6520836080006975820

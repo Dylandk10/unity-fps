@@ -12,11 +12,19 @@ public class AmmoBox : MonoBehaviour {
     }
 
     private bool DetectNearByPlayer() {
-        Debug.Log("We are running");
+        //if the player is by the ammobox the colliders length will be greater than 0;
         var colliders = Physics.OverlapSphere(transform.position, 5f, playerMask);
-        foreach (var collider in colliders) {
+        if (colliders.Length > 0) {
             return true;
         }
         return false;
+    }
+
+    public void HideAmmo() {
+        this.gameObject.SetActive(false);
+    }
+
+    public void ShowAmmo() { 
+        this.gameObject.SetActive(true);
     }
 }

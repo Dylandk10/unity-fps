@@ -16,12 +16,12 @@ public class CanvasController : MonoBehaviour {
     void Update()
     {
         SetAmmoDisplayColor();
-        ammoDisplay.text = "Ammo: " + Gun.Instance.GetCurrentAmmo();
+        ammoDisplay.text = "Ammo: " + FirstPersonController.Instance.GetGun().GetCurrentAmmo();
 
     }
 
     private void SetAmmoDisplayColor() {
-        if (Gun.Instance.GetCurrentAmmoInt() <= LOW_AMMO_COUNT) {
+        if (FirstPersonController.Instance.GetGun().GetCurrentAmmoInt() <= LOW_AMMO_COUNT) {
             ammoDisplay.color = Color.red;
         }
         else {
