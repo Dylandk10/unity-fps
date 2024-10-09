@@ -555,13 +555,13 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 744edc0d39c210c4fba7e0d996774b29, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.316
+  m_Volume: 0.208
   m_Pitch: 1
   Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 98
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -1355,7 +1355,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 100 / 100
+  m_Text: 'Ammo: 100'
 --- !u!222 &1804723614
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1538,6 +1538,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1260686454386265094, guid: 09aade0ecefd01e4b8f7661acf64f5c2,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.5988
+      objectReference: {fileID: 0}
+    - target: {fileID: 8345070698610564303, guid: 09aade0ecefd01e4b8f7661acf64f5c2,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 48.42485
+      objectReference: {fileID: 0}
     - target: {fileID: 8345070699079395522, guid: 09aade0ecefd01e4b8f7661acf64f5c2,
         type: 3}
       propertyPath: m_RootOrder
@@ -1597,6 +1607,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Environment
+      objectReference: {fileID: 0}
+    - target: {fileID: 8345070699146477230, guid: 09aade0ecefd01e4b8f7661acf64f5c2,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 48.4035
+      objectReference: {fileID: 0}
+    - target: {fileID: 8345070699892721477, guid: 09aade0ecefd01e4b8f7661acf64f5c2,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.27
+      objectReference: {fileID: 0}
+    - target: {fileID: 8345070699892721477, guid: 09aade0ecefd01e4b8f7661acf64f5c2,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 37.69
+      objectReference: {fileID: 0}
+    - target: {fileID: 8345070700131179086, guid: 09aade0ecefd01e4b8f7661acf64f5c2,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.27
+      objectReference: {fileID: 0}
+    - target: {fileID: 8345070700131179086, guid: 09aade0ecefd01e4b8f7661acf64f5c2,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -10.65
       objectReference: {fileID: 0}
     - target: {fileID: 8345070700331616358, guid: 09aade0ecefd01e4b8f7661acf64f5c2,
         type: 3}

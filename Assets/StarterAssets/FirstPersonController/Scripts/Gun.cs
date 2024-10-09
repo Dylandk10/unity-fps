@@ -139,4 +139,8 @@ public class Gun : MonoBehaviour {
     public string GetMaxAmmo() { 
         return maxAmmo.ToString(); 
     }
+
+    public void GiveMaxAmmo() {
+        currentAmmo = maxAmmo;
+    }
 }

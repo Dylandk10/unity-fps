@@ -14,6 +14,8 @@ namespace StarterAssets
 		public bool sprint;
 		public bool shoot;
 		public bool switchShield;
+		public bool interact;
+		public bool gunPressed;
 
 		[Header("Movement Settings")]
 		public bool analogMovement;
@@ -53,6 +55,14 @@ namespace StarterAssets
 		public void OnSwitchShield(InputValue value) {
 			ShieldInput(value.isPressed);
 		}
+
+		public void OnInteract(InputValue value) {
+			InteractInput(value.isPressed);
+		}
+
+		public void OnSwitchGun(InputValue value) {
+			GunInput(value.isPressed);
+		}
 #endif
 
 
@@ -79,6 +89,10 @@ namespace StarterAssets
 		public void ShootInput(bool didShoot) {
 			shoot = didShoot;
 		}
+
+		public void InteractInput(bool didInteract) {
+			interact = didInteract;
+		}
 		
 		private void OnApplicationFocus(bool hasFocus)
 		{
@@ -87,6 +101,10 @@ namespace StarterAssets
 
 		private void ShieldInput(bool Shield) {
 			switchShield = Shield;
+		}
+
+		private void GunInput(bool Gun) {
+			gunPressed = Gun;
 		}
 
 		private void SetCursorState(bool newState)

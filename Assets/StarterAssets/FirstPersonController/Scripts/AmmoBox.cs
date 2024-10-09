@@ -1,14 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
+using StarterAssets;
 using UnityEngine;
 
 public class AmmoBox : MonoBehaviour {
     [SerializeField]
     LayerMask playerMask;
 
+    [SerializeField]
+    GameObject AmmoFloatingIcon;
+
+    private bool AmmoBoxHidden = false;
+    private float respawnTime = 10f;
+    private float pickUpTime;
+
     // Update is called once per frame
     void Update() {
-        DetectNearByPlayer();
+        PickUpAmmo();
+        RespawnAmmo();
     }
 
     private bool DetectNearByPlayer() {
@@ -20,11 +29,29 @@ public class AmmoBox : MonoBehaviour {
         return false;
     }
 
+    private void PickUpAmmo() {
+        var _inputs = FirstPersonController.Instance.GetInputs();
+        if (_inputs.interact && DetectNearByPlayer() && AmmoBoxHidden == false) {
+            FirstPersonController.Instance.GetGun().GiveMaxAmmo();
+            HideAmmo();
+            AmmoBoxHidden = true;
+            _inputs.interact = false;
+            pickUpTime = Time.time;
+        }
+    }
+
     public void HideAmmo() {
-        this.gameObject.SetActive(false);
+        AmmoFloatingIcon.SetActive(false);
     }
 
     public void ShowAmmo() { 
-        this.gameObject.SetActive(true);
+        AmmoFloatingIcon.SetActive(true);
+    }
+
+    private void RespawnAmmo() {
+        if (AmmoBoxHidden == true && pickUpTime + respawnTime < Time.time) {
+            ShowAmmo();
+            AmmoBoxHidden = false;
+        }
     }
 }

@@ -14,7 +14,9 @@ namespace StarterAssets
 
 		//varibales for gun
 		[SerializeField]
-		Gun gun;
+		GameObject[] guns;
+		private int activeGunIndex;
+		private Gun gun;
 
 
 		//varibales for shield
@@ -116,6 +118,8 @@ namespace StarterAssets
             else {
                 Instance = this;
             }
+
+			
         }
 
 		private void Start()
@@ -132,6 +136,10 @@ namespace StarterAssets
 			_jumpTimeoutDelta = JumpTimeout;
 			_fallTimeoutDelta = FallTimeout;
 			activeShieldIndex = 0;
+
+			//set the gun index and active gun
+			activeGunIndex = 0;
+			gun = guns[activeGunIndex].GetComponent<Gun>();
 		}
 
 		private void Update()
@@ -141,6 +149,7 @@ namespace StarterAssets
 			Move();
 			Shoot();
 			SwitchShield();
+			SwitchGun();
 		}
 
 		private void LateUpdate()
@@ -280,6 +289,11 @@ namespace StarterAssets
             _input.shoot = false;
         }
 
+		public StarterAssetsInputs GetInputs() {
+			return _input;
+		}
+
+
 		private void SwitchShield() {
 			if (_input.switchShield) {
 				activeShieldIndex += 1;
@@ -297,7 +311,24 @@ namespace StarterAssets
             _input.switchShield = false;
         }
 
-		public Gun GetGun() { return gun; }
+        private void SwitchGun() {
+            if (_input.gunPressed) {
+                activeGunIndex += 1;
+                if (activeGunIndex >= guns.Length) activeGunIndex = 0;
+                for (int i = 0; i < guns.Length; i++) {
+                    if (i == activeGunIndex) {
+                        guns[i].SetActive(true);
+                        gun = guns[i].GetComponent<Gun>();
+                    }
+                    else {
+                        guns[i].SetActive(false);
+                    }
+                }
+            }
+            _input.gunPressed = false;
+        }
+
+        public Gun GetGun() { return gun; }
 
 
 		private static float ClampAngle(float lfAngle, float lfMin, float lfMax)
