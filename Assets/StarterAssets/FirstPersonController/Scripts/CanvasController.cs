@@ -8,6 +8,9 @@ public class CanvasController : MonoBehaviour {
     public Text ammoDisplay;
     private const int LOW_AMMO_COUNT = 30;
 
+    [SerializeField]
+    GameObject HitSomethingMarker;
+
     private void Awake() {
         ammoDisplay = GetComponent<Text>();
     }
@@ -17,6 +20,7 @@ public class CanvasController : MonoBehaviour {
     {
         SetAmmoDisplayColor();
         ammoDisplay.text = "Ammo: " + FirstPersonController.Instance.GetGun().GetCurrentAmmo();
+        HitSomethingMarker.SetActive(FirstPersonController.Instance.GetHitSomething());
 
     }
 

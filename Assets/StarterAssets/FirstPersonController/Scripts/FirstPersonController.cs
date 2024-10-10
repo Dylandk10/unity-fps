@@ -17,6 +17,7 @@ namespace StarterAssets
 		GameObject[] guns;
 		private int activeGunIndex;
 		private Gun gun;
+		private bool hitSomething = false;
 
 
 		//varibales for shield
@@ -78,8 +79,13 @@ namespace StarterAssets
 		private float _jumpTimeoutDelta;
 		private float _fallTimeoutDelta;
 
-		//singleton for instance
-		public static FirstPersonController Instance { get; private set; }
+
+        //switch gun time
+        private readonly float switchGunLoadTime = 0.3f;
+        private float lastGunSwitch;
+
+        //singleton for instance
+        public static FirstPersonController Instance { get; private set; }
 
 
 #if ENABLE_INPUT_SYSTEM
@@ -136,13 +142,27 @@ namespace StarterAssets
 			_jumpTimeoutDelta = JumpTimeout;
 			_fallTimeoutDelta = FallTimeout;
 			activeShieldIndex = 0;
+			InitGuns();
+        }
 
-			//set the gun index and active gun
+        private void InitGuns() {
 			activeGunIndex = 0;
-			gun = guns[activeGunIndex].GetComponent<Gun>();
-		}
+            lastGunSwitch = Time.time;
+            for (int i = 0; i < guns.Length; i++) {
+                if (i == activeGunIndex) {
+                    guns[i].GetComponent<Renderer>().enabled = true;
+                    gun = guns[i].GetComponent<Gun>();
+                    guns[i].GetComponent<Animator>().SetBool("switchGuns", true);
+                }
+                else {
+                    guns[i].GetComponent<Renderer>().enabled = false;
+                    guns[i].GetComponent<Animator>().SetBool("switchGuns", false);
+                }
 
-		private void Update()
+            }
+        }
+
+        private void Update()
 		{
 			JumpAndGravity();
 			GroundedCheck();
@@ -311,22 +331,46 @@ namespace StarterAssets
             _input.switchShield = false;
         }
 
+		// For gun handling and swaping
         private void SwitchGun() {
             if (_input.gunPressed) {
                 activeGunIndex += 1;
                 if (activeGunIndex >= guns.Length) activeGunIndex = 0;
                 for (int i = 0; i < guns.Length; i++) {
-                    if (i == activeGunIndex) {
-                        guns[i].SetActive(true);
-                        gun = guns[i].GetComponent<Gun>();
+					if (i == activeGunIndex) {
+						guns[i].GetComponent<Renderer>().enabled = true;
+						gun = guns[i].GetComponent<Gun>();
+                        guns[i].GetComponent<Animator>().SetBool("switchGuns", true);
+                        SetGunSwitchLastTime();
+					}
+					else {
+						guns[i].GetComponent<Renderer>().enabled = false;
+                        guns[i].GetComponent<Animator>().SetBool("switchGuns", false);
                     }
-                    else {
-                        guns[i].SetActive(false);
-                    }
+                    
                 }
             }
             _input.gunPressed = false;
         }
+
+        public void SetGunSwitchLastTime() {
+            lastGunSwitch = Time.time;
+        }
+
+        public bool GunSwapComplete() {
+            if (lastGunSwitch + switchGunLoadTime < Time.time) {
+                return true;
+            }
+            return false;
+        }
+
+
+		//hit marker
+        public void SetHitSomething(bool didHit) {
+			hitSomething = didHit;
+		}
+
+		public bool GetHitSomething() { return hitSomething; }
 
         public Gun GetGun() { return gun; }
 
