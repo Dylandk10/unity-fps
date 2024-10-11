@@ -1183,7 +1183,7 @@ MonoBehaviour:
   ShootingSystem: {fileID: 198234346748616026, guid: 2cb37fe0c69e9bd4fbb6115161987b27,
     type: 3}
   BulletSpawnPoint: {fileID: 1452156160}
-  ImpactParticleSystem: {fileID: 9064919875212695174, guid: 4c12cf8aa358e944f80e357d85b88e35,
+  ImpactParticleSystem: {fileID: 9064919875212695174, guid: 20b9ab8540422b0408c6694bc0205655,
     type: 3}
   BulletTrail: {fileID: 328621789431213768, guid: 3d591935182f84544aedb480d08ace22,
     type: 3}

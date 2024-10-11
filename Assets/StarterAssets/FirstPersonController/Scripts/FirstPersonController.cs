@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Unity.VisualScripting;
+using UnityEngine;
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
 #endif
@@ -84,6 +85,10 @@ namespace StarterAssets
         private readonly float switchGunLoadTime = 0.3f;
         private float lastGunSwitch;
 
+        //hitmarker on canvas show timer
+        private readonly float hitMarkTimer = 0.05f;
+        private float lastHitTime;
+
         //singleton for instance
         public static FirstPersonController Instance { get; private set; }
 
@@ -145,6 +150,7 @@ namespace StarterAssets
 			InitGuns();
         }
 
+		//the initalizer to set all gun data for the player to use
         private void InitGuns() {
 			activeGunIndex = 0;
             lastGunSwitch = Time.time;
@@ -170,6 +176,7 @@ namespace StarterAssets
 			Shoot();
 			SwitchShield();
 			SwitchGun();
+			SetHitSomething(false);
 		}
 
 		private void LateUpdate()
@@ -357,6 +364,8 @@ namespace StarterAssets
             lastGunSwitch = Time.time;
         }
 
+
+		//delay for the run swap before shooting also helps with same time on anim
         public bool GunSwapComplete() {
             if (lastGunSwitch + switchGunLoadTime < Time.time) {
                 return true;
@@ -367,7 +376,14 @@ namespace StarterAssets
 
 		//hit marker
         public void SetHitSomething(bool didHit) {
-			hitSomething = didHit;
+			if(lastHitTime + hitMarkTimer < Time.time && didHit) {
+                hitSomething = true;
+			 } else if(didHit) {
+                hitSomething = true;
+                lastHitTime = Time.time;
+            } else {
+				hitSomething = false;
+			}
 		}
 
 		public bool GetHitSomething() { return hitSomething; }
