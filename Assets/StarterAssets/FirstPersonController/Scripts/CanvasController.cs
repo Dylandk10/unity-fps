@@ -20,7 +20,6 @@ public class CanvasController : MonoBehaviour {
     {
         SetAmmoDisplayColor();
         ammoDisplay.text = "Ammo: " + FirstPersonController.Instance.GetGun().GetCurrentAmmo();
-        HitSomethingMarker.SetActive(FirstPersonController.Instance.GetHitSomething());
 
     }
 

@@ -58,8 +58,6 @@ public class Gun : MonoBehaviour {
             ShootingSystem.Play();
             Vector3 direction = GetDirection();
             if (Physics.Raycast(camera.transform.position, direction, out RaycastHit hit, float.MaxValue, Mask)) {
-                Debug.Log("Spawning true");
-                FirstPersonController.Instance.SetHitSomething(true);
                 Vector3 gunRotate = hit.point - transform.position;
                 BulletSpawnPoint.transform.rotation = Quaternion.LookRotation(gunRotate);
 
@@ -71,8 +69,6 @@ public class Gun : MonoBehaviour {
             }
             // this has been updated to fix a commonly reported problem that you cannot fire if you would not hit anything
             else {
-                Debug.Log("Spawning false");
-                FirstPersonController.Instance.SetHitSomething(false);
                 TrailRenderer trail = Instantiate(BulletTrail, BulletSpawnPoint.position, Quaternion.identity);
 
                 StartCoroutine(SpawnTrail(trail, BulletSpawnPoint.position + GetDirection() * 100, Vector3.zero, false));

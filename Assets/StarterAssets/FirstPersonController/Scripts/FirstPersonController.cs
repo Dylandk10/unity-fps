@@ -18,11 +18,15 @@ namespace StarterAssets
 		GameObject[] guns;
 		private int activeGunIndex;
 		private Gun gun;
-		private bool hitSomething = false;
+
+        //interact objects like ammo health doors etc
+        [SerializeField]
+        LayerMask interactObjectMask;
+		private IInteractObject interactObject = null;
 
 
-		//varibales for shield
-		[SerializeField]
+        //varibales for shield
+        [SerializeField]
 		public GameObject[] shields;
 		private int activeShieldIndex;
 		private string activeShieldName;
@@ -176,7 +180,7 @@ namespace StarterAssets
 			Shoot();
 			SwitchShield();
 			SwitchGun();
-			SetHitSomething(false);
+			Interact();
 		}
 
 		private void LateUpdate()
@@ -374,19 +378,26 @@ namespace StarterAssets
         }
 
 
-		//hit marker
-        public void SetHitSomething(bool didHit) {
-			if(lastHitTime + hitMarkTimer < Time.time && didHit) {
-                hitSomething = true;
-			 } else if(didHit) {
-                hitSomething = true;
-                lastHitTime = Time.time;
-            } else {
-				hitSomething = false;
+		//dealing with interact objects
+		private void Interact() {
+			if(_input.interact && DetectAndSetNearByInteractObjects()) {
+				interactObject.Interact();
 			}
+			_input.interact = false;
 		}
 
-		public bool GetHitSomething() { return hitSomething; }
+        private bool DetectAndSetNearByInteractObjects() {
+            //if the player is by the interact object
+            var colliders = Physics.OverlapSphere(transform.position, 3f, interactObjectMask);
+			//because we only interact with ammo, health, doors, and levers there will never be a time where they overlap due to map planning
+			//so we can just return the first create
+            if (colliders.Length > 0) {
+				interactObject = colliders[0].GetComponent<IInteractObject>();
+				return true;
+            }
+			interactObject = null;
+			return false;
+        }
 
         public Gun GetGun() { return gun; }
 
