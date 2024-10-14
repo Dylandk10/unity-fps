@@ -17,7 +17,6 @@ public class GunAudioHandler : MonoBehaviour {
     }
 
     public void PlayGunAudio(AudioSource gunShotAudio) {
-        DontDestroyOnLoad(gunShotAudio);
         int randomPitch = Random.Range(0, pitchArray.Length);
         gunShotAudio.pitch = pitchArray[randomPitch];
         gunShotAudio.PlayOneShot(gunShotAudio.clip);

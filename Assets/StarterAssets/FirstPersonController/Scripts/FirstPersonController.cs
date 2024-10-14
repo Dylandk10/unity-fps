@@ -181,7 +181,8 @@ namespace StarterAssets
 			SwitchShield();
 			SwitchGun();
 			Interact();
-		}
+
+        }
 
 		private void LateUpdate()
 		{
@@ -264,56 +265,47 @@ namespace StarterAssets
 			_controller.Move(inputDirection.normalized * (_speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
 		}
 
-		private void JumpAndGravity()
-		{
-			if (Grounded)
-			{
-				// reset the fall timeout timer
-				_fallTimeoutDelta = FallTimeout;
+        private void JumpAndGravity() {
+            if (Grounded) {
+                // reset the fall timeout timer
+                _fallTimeoutDelta = FallTimeout;
 
-				// stop our velocity dropping infinitely when grounded
-				if (_verticalVelocity < 0.0f)
-				{
-					_verticalVelocity = -2f;
-				}
+                // stop our velocity dropping infinitely when grounded
+                if (_verticalVelocity < 0.0f) {
+                    _verticalVelocity = -2f;
+                }
 
-				// Jump
-				if (_input.jump && _jumpTimeoutDelta <= 0.0f)
-				{
-					// the square root of H * -2 * G = how much velocity needed to reach desired height
-					_verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
-				}
+                // Jump
+                if (_input.jump && _jumpTimeoutDelta <= 0.0f) {
+                    _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
+                }
 
-				// jump timeout
-				if (_jumpTimeoutDelta >= 0.0f)
-				{
-					_jumpTimeoutDelta -= Time.deltaTime;
-				}
-			}
-			else
-			{
-				// reset the jump timeout timer
-				_jumpTimeoutDelta = JumpTimeout;
+                // jump timeout
+                if (_jumpTimeoutDelta >= 0.0f) {
+                    _jumpTimeoutDelta -= Time.deltaTime;
+                }
+            }
+            else {
+                // reset the jump timeout timer
+                _jumpTimeoutDelta = JumpTimeout;
 
-				// fall timeout
-				if (_fallTimeoutDelta >= 0.0f)
-				{
-					_fallTimeoutDelta -= Time.deltaTime;
-				}
+                // fall timeout
+                if (_fallTimeoutDelta >= 0.0f) {
+                    _fallTimeoutDelta -= Time.deltaTime;
+                }
 
-				// if we are not grounded, do not jump
-				_input.jump = false;
-			}
+                // if we are not grounded, do not jump
+                _input.jump = false;
+            }
 
-			// apply gravity over time if under terminal (multiply by delta time twice to linearly speed up over time)
-			if (_verticalVelocity < _terminalVelocity)
-			{
-				_verticalVelocity += Gravity * Time.deltaTime;
-			}
-		}
+            // apply gravity over time if under terminal (multiply by delta time twice to linearly speed up over time)
+            if (_verticalVelocity < _terminalVelocity) {
+                _verticalVelocity += Gravity * Time.deltaTime;
+            }
+        }
 
 
-		private void Shoot() {
+        private void Shoot() {
 			if(_input.shoot) {
 				gun.Shoot();
 			}
@@ -390,7 +382,7 @@ namespace StarterAssets
             //if the player is by the interact object
             var colliders = Physics.OverlapSphere(transform.position, 3f, interactObjectMask);
 			//because we only interact with ammo, health, doors, and levers there will never be a time where they overlap due to map planning
-			//so we can just return the first create
+			//so we can just return the first object which is the only object
             if (colliders.Length > 0) {
 				interactObject = colliders[0].GetComponent<IInteractObject>();
 				return true;
