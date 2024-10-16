@@ -17,7 +17,6 @@ public class AmmoBox : MonoBehaviour, IInteractObject {
     }
 
     public void Interact() {
-        Debug.Log("Interacting with ammo");
         if (AmmoBoxHidden == false) {
             FirstPersonController.Instance.GetGun().GiveMaxAmmo();
             HideAmmo();
