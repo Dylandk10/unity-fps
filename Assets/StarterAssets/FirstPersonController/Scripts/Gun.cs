@@ -34,6 +34,9 @@ public class Gun : MonoBehaviour {
     private int maxAmmo = 100;
     private int currentAmmo;
 
+    [SerializeField]
+    private ColorSchemeSO colorScheme;
+
 
     //sfx
     private AudioSource gunShotAudio;
@@ -135,5 +138,9 @@ public class Gun : MonoBehaviour {
 
     public void GiveMaxAmmo() {
         currentAmmo = maxAmmo;
+    }
+
+    public string GetColor() {
+        return colorScheme.color;
     }
 }

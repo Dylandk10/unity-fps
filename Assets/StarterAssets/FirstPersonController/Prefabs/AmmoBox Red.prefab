@@ -274,6 +274,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AmmoFloatingIcon: {fileID: 6019874559274321591}
+  colorScheme: {fileID: 11400000, guid: fcab784ddb7d81944b0d9ca67e77df5d, type: 2}
 --- !u!65 &3628781829325530964
 BoxCollider:
   m_ObjectHideFlags: 0

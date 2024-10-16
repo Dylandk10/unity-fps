@@ -287,6 +287,7 @@ MonoBehaviour:
     m_Bits: 1
   BulletSpeed: 110
   camera: {fileID: 1598711379}
+  colorScheme: {fileID: 11400000, guid: c9bec03f53d4bc94b9c6b58dea22e993, type: 2}
 --- !u!1001 &446952373
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -392,7 +393,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: d2d1272fd9244764fb606d5092c7411e, type: 2}
+      objectReference: {fileID: 2100000, guid: 11710b53e473c164dbc2f939ec197c45, type: 2}
     - target: {fileID: 6938876788511802571, guid: b8bab6848aa67ce47ba5081b81ec631e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -806,6 +807,7 @@ MonoBehaviour:
     m_Bits: 1
   BulletSpeed: 110
   camera: {fileID: 1598711379}
+  colorScheme: {fileID: 11400000, guid: fcab784ddb7d81944b0d9ca67e77df5d, type: 2}
 --- !u!82 &868404178
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1372,6 +1374,7 @@ MonoBehaviour:
     m_Bits: 1
   BulletSpeed: 110
   camera: {fileID: 1598711379}
+  colorScheme: {fileID: 11400000, guid: 2129ce4e536f3564195811c3e82c6939, type: 2}
 --- !u!82 &1072531496
 AudioSource:
   m_ObjectHideFlags: 0

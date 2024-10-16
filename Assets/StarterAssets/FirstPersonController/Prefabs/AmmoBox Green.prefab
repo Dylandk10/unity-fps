@@ -185,7 +185,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: 45fb3b613218da844b047d1f9349e0d6,
         type: 3}
       propertyPath: m_Name
-      value: AmmoBox
+      value: AmmoBox Green
       objectReference: {fileID: 0}
     - target: {fileID: -927199367670048503, guid: 45fb3b613218da844b047d1f9349e0d6,
         type: 3}
@@ -269,6 +269,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AmmoFloatingIcon: {fileID: 6019874559274321591}
+  colorScheme: {fileID: 11400000, guid: c9bec03f53d4bc94b9c6b58dea22e993, type: 2}
 --- !u!65 &3628781829325530964
 BoxCollider:
   m_ObjectHideFlags: 0

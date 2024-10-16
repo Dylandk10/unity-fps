@@ -393,6 +393,15 @@ namespace StarterAssets
 
         public Gun GetGun() { return gun; }
 
+		public void GiveAmmoByColor(string color) {
+			for (int i = 0; i < guns.Length; i++) {
+				var current = guns[i].GetComponent<Gun>();
+				if (current.GetColor() == color) {
+					current.GiveMaxAmmo();
+				}
+			}
+		}
+
 
 		private static float ClampAngle(float lfAngle, float lfMin, float lfMax)
 		{

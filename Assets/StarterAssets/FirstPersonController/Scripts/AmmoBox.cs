@@ -7,6 +7,9 @@ public class AmmoBox : MonoBehaviour, IInteractObject {
     [SerializeField]
     GameObject AmmoFloatingIcon;
 
+    [SerializeField]
+    private ColorSchemeSO colorScheme;
+
     private bool AmmoBoxHidden = false;
     private float respawnTime = 10f;
     private float pickUpTime;
@@ -18,7 +21,7 @@ public class AmmoBox : MonoBehaviour, IInteractObject {
 
     public void Interact() {
         if (AmmoBoxHidden == false) {
-            FirstPersonController.Instance.GetGun().GiveMaxAmmo();
+            FirstPersonController.Instance.GiveAmmoByColor(colorScheme.color);
             HideAmmo();
             AmmoBoxHidden = true;
             pickUpTime = Time.time;
@@ -38,5 +41,9 @@ public class AmmoBox : MonoBehaviour, IInteractObject {
             ShowAmmo();
             AmmoBoxHidden = false;
         }
+    }
+
+    public string GetColor() {
+        return colorScheme.color;
     }
 }
