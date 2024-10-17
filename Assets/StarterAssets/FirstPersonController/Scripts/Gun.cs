@@ -40,6 +40,10 @@ public class Gun : MonoBehaviour {
 
     //sfx
     private AudioSource gunShotAudio;
+    private readonly float[] pitchArray = { 0.85f, 0.95f, 1.01f, 1.15f };
+
+    [SerializeField]
+    public AudioClip changeWepon;
 
     private void Awake() {
         // Animator = GetComponent<Animator>();
@@ -57,7 +61,7 @@ public class Gun : MonoBehaviour {
             if (currentAmmo <= 0) { return; }
 
             // Animator.SetBool("New Bool", true);
-            GunAudioHandler.Instance.PlayGunAudio(gunShotAudio);
+            PlayGunAudio();
             ShootingSystem.Play();
             Vector3 direction = GetDirection();
             if (Physics.Raycast(camera.transform.position, direction, out RaycastHit hit, float.MaxValue, Mask)) {
@@ -142,5 +146,25 @@ public class Gun : MonoBehaviour {
 
     public string GetColor() {
         return colorScheme.color;
+    }
+
+    public AudioClip GetWeponChangeAudio() {
+        return changeWepon;
+    }
+
+    public void PlayGunAudio() {
+        int randomPitch = Random.Range(0, pitchArray.Length);
+        gunShotAudio.pitch = pitchArray[randomPitch];
+        gunShotAudio.PlayOneShot(gunShotAudio.clip);
+    }
+
+    public void PlayGenericSound(AudioClip sound) {
+        gunShotAudio.PlayOneShot(sound);
+    }
+
+    public void PlayWeponChangeAudio() {
+        gunShotAudio.volume = 1.0f;
+        gunShotAudio.PlayOneShot(changeWepon);
+        gunShotAudio.volume = 0.208f;
     }
 }

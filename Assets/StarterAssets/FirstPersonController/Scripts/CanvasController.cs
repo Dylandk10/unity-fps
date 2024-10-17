@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class CanvasController : MonoBehaviour {
     // Start is called before the first frame update
-    public Text ammoDisplay;
+    private Text ammoDisplay;
     private const int LOW_AMMO_COUNT = 30;
 
     [SerializeField]

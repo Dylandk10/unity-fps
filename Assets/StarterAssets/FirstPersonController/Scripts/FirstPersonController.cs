@@ -159,7 +159,6 @@ namespace StarterAssets
 			_fallTimeoutDelta = FallTimeout;
 			activeShieldIndex = 0;
 			currentHealth = Max_Health;
-			healthBar.SetMaxHealth(currentHealth);
 			InitGuns();
         }
 
@@ -353,6 +352,7 @@ namespace StarterAssets
 					if (i == activeGunIndex) {
 						guns[i].GetComponent<Renderer>().enabled = true;
 						gun = guns[i].GetComponent<Gun>();
+						gun.PlayWeponChangeAudio();
                         guns[i].GetComponent<Animator>().SetBool("switchGuns", true);
                         SetGunSwitchLastTime();
 					}
