@@ -9,6 +9,9 @@ public class CanvasController : MonoBehaviour {
     private const int LOW_AMMO_COUNT = 30;
 
     [SerializeField]
+    public Text gunDisplay;
+
+    [SerializeField]
     GameObject HitSomethingMarker;
 
     private void Awake() {
@@ -18,6 +21,7 @@ public class CanvasController : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+        DisplayGunAmmo();
         SetAmmoDisplayColor();
         ammoDisplay.text = "Ammo: " + FirstPersonController.Instance.GetGun().GetCurrentAmmo();
 
@@ -30,5 +34,15 @@ public class CanvasController : MonoBehaviour {
         else {
             ammoDisplay.color = Color.white;
         }
+    }
+
+    private void DisplayGunAmmo() {
+        GameObject[] guns = FirstPersonController.Instance.GetGuns();
+        Gun blueGun = guns[0].GetComponent<Gun>();
+        Gun redGun = guns[1].GetComponent<Gun>();
+        Gun greenGun = guns[2].GetComponent<Gun>();
+        gunDisplay.text = "Blue: " + blueGun.GetCurrentAmmo() + "\n\n"
+                            + "Red: " + redGun.GetCurrentAmmo() + "\n\n"
+                            + "Green: " + greenGun.GetCurrentAmmo() + "\n\n";
     }
 }

@@ -164,7 +164,7 @@ public class Gun : MonoBehaviour {
     }
 
     public void PlayWeponChangeAudio() {
-        gunShotAudio.volume = 1.0f;
+        gunShotAudio.volume = 0.9f;
         gunShotAudio.PlayOneShot(changeWepon);
     }
 }

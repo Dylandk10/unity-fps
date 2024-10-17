@@ -403,6 +403,10 @@ namespace StarterAssets
 
         public Gun GetGun() { return gun; }
 
+		public GameObject[] GetGuns() {
+			return guns;
+		}
+
 		public void GiveAmmoByColor(string color) {
 			for (int i = 0; i < guns.Length; i++) {
 				var current = guns[i].GetComponent<Gun>();
