@@ -1,4 +1,5 @@
 ﻿using Unity.VisualScripting;
+using UnityEditor.ShaderGraph.Drawing;
 using UnityEngine;
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
@@ -93,6 +94,12 @@ namespace StarterAssets
         private readonly float hitMarkTimer = 0.05f;
         private float lastHitTime;
 
+		//health
+		[SerializeField]
+		public HealthBar healthBar;
+		private readonly int Max_Health = 100;
+		private int currentHealth;
+
         //singleton for instance
         public static FirstPersonController Instance { get; private set; }
 
@@ -151,6 +158,8 @@ namespace StarterAssets
 			_jumpTimeoutDelta = JumpTimeout;
 			_fallTimeoutDelta = FallTimeout;
 			activeShieldIndex = 0;
+			currentHealth = Max_Health;
+			healthBar.SetMaxHealth(currentHealth);
 			InitGuns();
         }
 
@@ -401,6 +410,14 @@ namespace StarterAssets
 					current.GiveMaxAmmo();
 				}
 			}
+		}
+
+		public int GetCurrentHealthInt() {
+			return currentHealth;
+		}
+
+		public string GetCurrentHealthString() {
+			return currentHealth.ToString();
 		}
 
 
