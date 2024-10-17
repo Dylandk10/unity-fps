@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3573070642318734036}
   - component: {fileID: 5080268010097913233}
   - component: {fileID: 4069981812344648044}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: GreenShield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -118,7 +118,7 @@ GameObject:
   - component: {fileID: 3143408431244862772}
   - component: {fileID: 5135837039586673275}
   - component: {fileID: 8545617752251666739}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Backside
   m_TagString: Untagged
   m_Icon: {fileID: 0}

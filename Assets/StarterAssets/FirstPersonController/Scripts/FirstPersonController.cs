@@ -181,6 +181,7 @@ namespace StarterAssets
 			SwitchShield();
 			SwitchGun();
 			Interact();
+			Debug.Log(_playerInput.currentControlScheme);
 
         }
 
