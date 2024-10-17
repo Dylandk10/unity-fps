@@ -153,6 +153,7 @@ public class Gun : MonoBehaviour {
     }
 
     public void PlayGunAudio() {
+        gunShotAudio.volume = 0.208f;
         int randomPitch = Random.Range(0, pitchArray.Length);
         gunShotAudio.pitch = pitchArray[randomPitch];
         gunShotAudio.PlayOneShot(gunShotAudio.clip);
@@ -165,6 +166,5 @@ public class Gun : MonoBehaviour {
     public void PlayWeponChangeAudio() {
         gunShotAudio.volume = 1.0f;
         gunShotAudio.PlayOneShot(changeWepon);
-        gunShotAudio.volume = 0.208f;
     }
 }
