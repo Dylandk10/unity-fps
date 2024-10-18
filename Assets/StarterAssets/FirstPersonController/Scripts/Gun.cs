@@ -37,6 +37,9 @@ public class Gun : MonoBehaviour {
     [SerializeField]
     private ColorSchemeSO colorScheme;
 
+    [SerializeField]
+    public Image selectImage;
+
 
     //sfx
     private AudioSource gunShotAudio;
@@ -166,5 +169,9 @@ public class Gun : MonoBehaviour {
     public void PlayWeponChangeAudio() {
         gunShotAudio.volume = 0.9f;
         gunShotAudio.PlayOneShot(changeWepon);
+    }
+
+    public void SetDisplayActive(bool isActive) {
+        selectImage.gameObject.SetActive(isActive);
     }
 }

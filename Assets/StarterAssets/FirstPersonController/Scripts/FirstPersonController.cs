@@ -170,10 +170,12 @@ namespace StarterAssets
                 if (i == activeGunIndex) {
                     guns[i].GetComponent<Renderer>().enabled = true;
                     gun = guns[i].GetComponent<Gun>();
+                    gun.SetDisplayActive(true);
                     guns[i].GetComponent<Animator>().SetBool("switchGuns", true);
                 }
                 else {
                     guns[i].GetComponent<Renderer>().enabled = false;
+					guns[i].GetComponent<Gun>().SetDisplayActive(false);
                     guns[i].GetComponent<Animator>().SetBool("switchGuns", false);
                 }
 
@@ -317,6 +319,7 @@ namespace StarterAssets
         private void Shoot() {
 			if(_input.shoot) {
 				gun.Shoot();
+				TakeDamage(20);
 			}
             _input.shoot = false;
         }
@@ -353,11 +356,13 @@ namespace StarterAssets
 						guns[i].GetComponent<Renderer>().enabled = true;
 						gun = guns[i].GetComponent<Gun>();
 						gun.PlayWeponChangeAudio();
+						gun.SetDisplayActive(true);
                         guns[i].GetComponent<Animator>().SetBool("switchGuns", true);
                         SetGunSwitchLastTime();
 					}
 					else {
 						guns[i].GetComponent<Renderer>().enabled = false;
+                        guns[i].GetComponent<Gun>().SetDisplayActive(false);
                         guns[i].GetComponent<Animator>().SetBool("switchGuns", false);
                     }
                     
@@ -382,9 +387,11 @@ namespace StarterAssets
 
 		//dealing with interact objects
 		private void Interact() {
-			if(_input.interact && DetectAndSetNearByInteractObjects()) {
+			Debug.Log(interactObject);
+			if(_input.interact && DetectAndSetNearByInteractObjects() && interactObject != null) {
 				interactObject.Interact();
-			}
+                interactObject = null;
+            }
 			_input.interact = false;
 		}
 
@@ -422,6 +429,16 @@ namespace StarterAssets
 
 		public string GetCurrentHealthString() {
 			return currentHealth.ToString();
+		}
+
+		public void TakeDamage(int damage) {
+			currentHealth -= damage;
+			healthBar.SetHealth(currentHealth);
+		}
+
+		public void GiveMaxHealth() {
+			currentHealth = Max_Health;
+			healthBar.SetMaxHealth(currentHealth);
 		}
 
 

@@ -23,7 +23,7 @@ public class CanvasController : MonoBehaviour {
     {
         DisplayGunAmmo();
         SetAmmoDisplayColor();
-        ammoDisplay.text = "Ammo: " + FirstPersonController.Instance.GetGun().GetCurrentAmmo();
+        ammoDisplay.text = FirstPersonController.Instance.GetGun().GetColor() + " : " + FirstPersonController.Instance.GetGun().GetCurrentAmmo();
 
     }
 
@@ -41,7 +41,7 @@ public class CanvasController : MonoBehaviour {
         Gun blueGun = guns[0].GetComponent<Gun>();
         Gun redGun = guns[1].GetComponent<Gun>();
         Gun greenGun = guns[2].GetComponent<Gun>();
-        gunDisplay.text = "Blue: " + blueGun.GetCurrentAmmo() + "\n\n"
+        gunDisplay.text =     "Blue: " + blueGun.GetCurrentAmmo() + "\n\n"
                             + "Red: " + redGun.GetCurrentAmmo() + "\n\n"
                             + "Green: " + greenGun.GetCurrentAmmo() + "\n\n";
     }
