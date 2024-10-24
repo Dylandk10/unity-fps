@@ -5,8 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 #endif
 
-namespace StarterAssets
-{
+namespace StarterAssets {
 	[RequireComponent(typeof(CharacterController))]
 #if ENABLE_INPUT_SYSTEM
 	[RequireComponent(typeof(PlayerInput))]
@@ -113,10 +112,8 @@ namespace StarterAssets
 
 		private const float _threshold = 0.01f;
 
-		private bool IsCurrentDeviceMouse
-		{
-			get
-			{
+		private bool IsCurrentDeviceMouse {
+			get {
 				#if ENABLE_INPUT_SYSTEM
 				return _playerInput.currentControlScheme == "KeyboardMouse";
 				#else
@@ -125,11 +122,9 @@ namespace StarterAssets
 			}
 		}
 
-		private void Awake()
-		{
+		private void Awake() {
 			// get a reference to our main camera
-			if (_mainCamera == null)
-			{
+			if (_mainCamera == null) {
 				_mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
 			}
 
@@ -144,8 +139,7 @@ namespace StarterAssets
 			
         }
 
-		private void Start()
-		{
+		private void Start() {
 			_controller = GetComponent<CharacterController>();
 			_input = GetComponent<StarterAssetsInputs>();
 #if ENABLE_INPUT_SYSTEM
@@ -182,8 +176,7 @@ namespace StarterAssets
             }
         }
 
-        private void Update()
-		{
+        private void Update() {
 			JumpAndGravity();
 			GroundedCheck();
 			Move();
@@ -195,23 +188,19 @@ namespace StarterAssets
 
         }
 
-		private void LateUpdate()
-		{
+		private void LateUpdate() {
 			CameraRotation();
 		}
 
-		private void GroundedCheck()
-		{
+		private void GroundedCheck() {
 			// set sphere position, with offset
 			Vector3 spherePosition = new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z);
 			Grounded = Physics.CheckSphere(spherePosition, GroundedRadius, GroundLayers, QueryTriggerInteraction.Ignore);  //cannot have default layer selected
 		}
 
-		private void CameraRotation()
-		{
+		private void CameraRotation() {
 			// if there is an input
-			if (_input.look.sqrMagnitude >= _threshold)
-			{
+			if (_input.look.sqrMagnitude >= _threshold) {
 				//Don't multiply mouse input by Time.deltaTime
 				float deltaTimeMultiplier = IsCurrentDeviceMouse ? 1.0f : Time.deltaTime;
 				
@@ -229,8 +218,7 @@ namespace StarterAssets
 			}
 		}
 
-		private void Move()
-		{
+		private void Move() {
 			// set target speed based on move speed, sprint speed and if sprint is pressed
 			float targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
 
@@ -247,17 +235,14 @@ namespace StarterAssets
 			float inputMagnitude = _input.analogMovement ? _input.move.magnitude : 1f;
 
 			// accelerate or decelerate to target speed
-			if (currentHorizontalSpeed < targetSpeed - speedOffset || currentHorizontalSpeed > targetSpeed + speedOffset)
-			{
+			if (currentHorizontalSpeed < targetSpeed - speedOffset || currentHorizontalSpeed > targetSpeed + speedOffset) {
 				// creates curved result rather than a linear one giving a more organic speed change
 				// note T in Lerp is clamped, so we don't need to clamp our speed
 				_speed = Mathf.Lerp(currentHorizontalSpeed, targetSpeed * inputMagnitude, Time.deltaTime * SpeedChangeRate);
 
 				// round speed to 3 decimal places
 				_speed = Mathf.Round(_speed * 1000f) / 1000f;
-			}
-			else
-			{
+			} else {
 				_speed = targetSpeed;
 			}
 
@@ -266,8 +251,7 @@ namespace StarterAssets
 
 			// note: Vector2's != operator uses approximation so is not floating point error prone, and is cheaper than magnitude
 			// if there is a move input rotate player when the player is moving
-			if (_input.move != Vector2.zero)
-			{
+			if (_input.move != Vector2.zero) {
 				// move
 				inputDirection = transform.right * _input.move.x + transform.forward * _input.move.y;
 			}
@@ -295,8 +279,7 @@ namespace StarterAssets
                 if (_jumpTimeoutDelta >= 0.0f) {
                     _jumpTimeoutDelta -= Time.deltaTime;
                 }
-            }
-            else {
+            } else {
                 // reset the jump timeout timer
                 _jumpTimeoutDelta = JumpTimeout;
 
@@ -319,7 +302,6 @@ namespace StarterAssets
         private void Shoot() {
 			if(_input.shoot) {
 				gun.Shoot();
-				TakeDamage(20);
 			}
             _input.shoot = false;
         }
@@ -439,6 +421,14 @@ namespace StarterAssets
 		public void GiveMaxHealth() {
 			currentHealth = Max_Health;
 			healthBar.SetMaxHealth(currentHealth);
+		}
+
+		public Vector3 GetPosition() {
+			return transform.position;
+		}
+
+		public Transform GetTransform() {
+			return transform;
 		}
 
 

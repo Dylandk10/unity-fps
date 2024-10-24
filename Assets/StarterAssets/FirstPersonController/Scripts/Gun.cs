@@ -73,7 +73,8 @@ public class Gun : MonoBehaviour {
 
                 TrailRenderer trail = Instantiate(BulletTrail, BulletSpawnPoint.position, Quaternion.identity);
 
-                StartCoroutine(SpawnTrail(trail, hit.point, hit.normal, true));
+                StartCoroutine(SpawnTrail(trail, hit.point, hit.normal, true)); //true here leaves hit mark if we hit tht turret don't give a hitmark
+                Debug.Log(hit.collider.name);
 
                 LastShootTime = Time.time;
             }
