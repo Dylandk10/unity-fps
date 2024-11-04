@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1238980365206254049
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7831664324599498202}
+  m_Layer: 0
+  m_Name: SpawnPointOne
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7831664324599498202
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1238980365206254049}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.026, y: 0.114, z: 0.1885}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8056996504664230763}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2827882295379097047
 GameObject:
   m_ObjectHideFlags: 0
@@ -50,6 +81,21 @@ MonoBehaviour:
   turretHead: {fileID: 3900498351688057035}
   turretRotator: {fileID: 8439318799319075220}
   turretBody: {fileID: 8990533692816823720}
+  AddBulletSpread: 0
+  BulletSpreadVariance: {x: 0.1, y: 0.1, z: 0.1}
+  ShootingSystem: {fileID: 198234346748616026, guid: 2cb37fe0c69e9bd4fbb6115161987b27,
+    type: 3}
+  BulletSpawnPointOne: {fileID: 7831664324599498202}
+  BulletSpawnPointTwo: {fileID: 4871512333540724134}
+  ImpactParticleSystem: {fileID: 9064919875212695174, guid: 4c12cf8aa358e944f80e357d85b88e35,
+    type: 3}
+  BulletTrail: {fileID: 328621789431213768, guid: 4313a91ac4504764aa536e75cd0daee5,
+    type: 3}
+  ShootDelay: 1
+  Mask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  BulletSpeed: 70
 --- !u!1 &3900498351688057035
 GameObject:
   m_ObjectHideFlags: 0
@@ -83,6 +129,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4481905618530093833}
+  - {fileID: 7831664324599498202}
+  - {fileID: 4871512333540724134}
   m_Father: {fileID: 3202352912792705267}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2691550788544780310
@@ -156,6 +204,37 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.29, y: 0.16, z: 0.2149063}
   m_Center: {x: 0, y: 0.09, z: 0}
+--- !u!1 &4549237046243772718
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4871512333540724134}
+  m_Layer: 0
+  m_Name: SpawnPointTwo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4871512333540724134
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4549237046243772718}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.025, y: 0.114, z: 0.1885}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8056996504664230763}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7618512627815746170
 GameObject:
   m_ObjectHideFlags: 0

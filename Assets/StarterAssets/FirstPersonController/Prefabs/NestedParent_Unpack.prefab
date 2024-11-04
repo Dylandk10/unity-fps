@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6556307555316582679}
   m_Layer: 0
   m_Name: NestedParent_Unpack
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44,6 +44,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6556307555316582679}
     m_Modifications:
+    - target: {fileID: 1201638839101893990, guid: a52355df4c7ff7e499342a29cb352a84,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 1556509903292969774, guid: a52355df4c7ff7e499342a29cb352a84,
         type: 3}
       propertyPath: m_Camera
@@ -112,6 +117,11 @@ PrefabInstance:
     - target: {fileID: 4362309976292780131, guid: a52355df4c7ff7e499342a29cb352a84,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6491071254054157737, guid: a52355df4c7ff7e499342a29cb352a84,
+        type: 3}
+      propertyPath: m_Center.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7726187005324358770, guid: a52355df4c7ff7e499342a29cb352a84,

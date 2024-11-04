@@ -369,7 +369,6 @@ namespace StarterAssets {
 
 		//dealing with interact objects
 		private void Interact() {
-			Debug.Log(interactObject);
 			if(_input.interact && DetectAndSetNearByInteractObjects() && interactObject != null) {
 				interactObject.Interact();
                 interactObject = null;
