@@ -69,6 +69,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerCapsule
       objectReference: {fileID: 0}
+    - target: {fileID: 2955108448953073051, guid: a52355df4c7ff7e499342a29cb352a84,
+        type: 3}
+      propertyPath: colorScheme
+      value: 
+      objectReference: {fileID: 11400000, guid: fcab784ddb7d81944b0d9ca67e77df5d,
+        type: 2}
     - target: {fileID: 4362309976292780131, guid: a52355df4c7ff7e499342a29cb352a84,
         type: 3}
       propertyPath: m_LocalPosition.x

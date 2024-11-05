@@ -69,7 +69,7 @@ public class Turret : MonoBehaviour {
             Vector3 direction = GetDirection();
             if (Physics.Raycast(turretHead.transform.position, direction, out RaycastHit hit, float.MaxValue, Mask)) {
                 if (hit.transform.gameObject.CompareTag("Player")) {
-                    FirstPersonController.Instance.TakeDamage(5);
+                    FirstPersonController.Instance.TakeDamage(5, "Red");
                     Debug.Log(hit.point);
                     ShootHit(hit);
                 }

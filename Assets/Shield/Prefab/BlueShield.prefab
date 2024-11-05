@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3573070642318734036}
   - component: {fileID: 5080268010097913233}
   - component: {fileID: 4069981812344648044}
+  - component: {fileID: -5862796078145626388}
   m_Layer: 0
   m_Name: BlueShield
   m_TagString: Untagged
@@ -106,6 +107,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-5862796078145626388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4498264552236489676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b09854f559597944d9021c2102ef84ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colorScheme: {fileID: 11400000, guid: 2129ce4e536f3564195811c3e82c6939, type: 2}
 --- !u!1 &7269169470587649257
 GameObject:
   m_ObjectHideFlags: 0

@@ -29,7 +29,7 @@ namespace StarterAssets {
         [SerializeField]
 		public GameObject[] shields;
 		private int activeShieldIndex;
-		private string activeShieldName;
+		private Shield shield;
 
 		[Header("Player")]
 		[Tooltip("Move speed of the character in m/s")]
@@ -318,7 +318,7 @@ namespace StarterAssets {
 				for (int i = 0; i < shields.Length; i++) {
 					if (i == activeShieldIndex) {
 						shields[i].SetActive(true);
-						activeShieldName = shields[i].name;
+						shield = shields[i].GetComponent<Shield>();
 					}
 					else {
 						shields[i].SetActive(false);
@@ -412,7 +412,10 @@ namespace StarterAssets {
 			return currentHealth.ToString();
 		}
 
-		public void TakeDamage(int damage) {
+		public void TakeDamage(int damage, string color) {
+			if (shield.GetColor() == color) {
+				return;
+			}
 			currentHealth -= damage;
 			healthBar.SetHealth(currentHealth);
 		}
