@@ -72,9 +72,12 @@ public class Gun : MonoBehaviour {
                 BulletSpawnPoint.transform.rotation = Quaternion.LookRotation(gunRotate);
 
                 TrailRenderer trail = Instantiate(BulletTrail, BulletSpawnPoint.position, Quaternion.identity);
-
-                StartCoroutine(SpawnTrail(trail, hit.point, hit.normal, true)); //true here leaves hit mark if we hit tht turret don't give a hitmark
-                Debug.Log(hit.collider.name);
+                if (hit.transform.gameObject.CompareTag("Turret")) {
+                    StartCoroutine(SpawnTrail(trail, hit.point, hit.normal, false));
+                    hit.collider.GetComponentInParent<Turret>().TakeDamage(5, GetColor());
+                } else {
+                    StartCoroutine(SpawnTrail(trail, hit.point, hit.normal, true));
+                }
 
                 LastShootTime = Time.time;
             }

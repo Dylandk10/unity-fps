@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 4081632721789888175}
   m_Layer: 0
   m_Name: Sci-Fi_Turret_2_Blue
-  m_TagString: Untagged
+  m_TagString: Turret
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -79,6 +79,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turretHead: {fileID: 3900498351688057035}
+  turretBarel: {fileID: 7618512627815746170}
   turretRotator: {fileID: 8439318799319075220}
   turretBody: {fileID: 8990533692816823720}
   AddBulletSpread: 0
@@ -96,6 +97,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   BulletSpeed: 70
+  shieldMatterials:
+  - {fileID: 2100000, guid: f389276312854e54280d85f33d631673, type: 2}
+  - {fileID: 2100000, guid: a97f325f602dc8a439572cc3a35dd0a3, type: 2}
+  - {fileID: 2100000, guid: 16a4366c366f5414fb2b866b436ef61f, type: 2}
 --- !u!1 &3900498351688057035
 GameObject:
   m_ObjectHideFlags: 0

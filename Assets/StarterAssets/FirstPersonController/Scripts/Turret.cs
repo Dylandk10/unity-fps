@@ -9,6 +9,8 @@ public class Turret : MonoBehaviour {
     [SerializeField]
     GameObject turretHead;
     [SerializeField]
+    GameObject turretBarel;
+    [SerializeField]
     GameObject turretRotator;
     [SerializeField]
     GameObject turretBody;
@@ -36,6 +38,22 @@ public class Turret : MonoBehaviour {
     [SerializeField]
     private float BulletSpeed = 100f;
     private float LastShootTime;
+    private int difficulty = 100;
+    private int diffcultyDelta = 30;
+
+    //health and other shield
+    private int health = 100;
+    private readonly string[] shieldColors = {"Red", "Blue", "Green"};
+    private int activeShieldIndex;
+
+    //shield matterials
+    [SerializeField]
+    Material[] shieldMatterials;
+
+
+    void Start() {
+        activeShieldIndex = 0;
+    }
 
 
     // Update is called once per frame
@@ -70,7 +88,6 @@ public class Turret : MonoBehaviour {
             if (Physics.Raycast(turretHead.transform.position, direction, out RaycastHit hit, float.MaxValue, Mask)) {
                 if (hit.transform.gameObject.CompareTag("Player")) {
                     FirstPersonController.Instance.TakeDamage(5, "Red");
-                    Debug.Log(hit.point);
                     ShootHit(hit);
                 }
             }
@@ -142,6 +159,39 @@ public class Turret : MonoBehaviour {
         //}
 
         Destroy(Trail.gameObject, Trail.time);
+    }
+
+    public void TakeDamage(int damage, string color) {
+        if (color == shieldColors[activeShieldIndex]) {
+            Debug.Log("Turret Blocked!");
+            return;
+        }
+        health -= damage;
+        Debug.Log("Turret Hit!");
+        ShouldSwitchcolor();
+    }
+
+    private int GetRandomNumber() {
+        return Random.Range(0, difficulty);
+    }
+
+    public void ShouldSwitchcolor() {
+        if (GetRandomNumber() < diffcultyDelta) {
+            SwitchColors();
+        }
+    }
+
+    private void SwitchColors() {
+        subtask_ChangeActiveIndex();
+        turretHead.GetComponent<Renderer>().material = shieldMatterials[activeShieldIndex];
+        turretBarel.GetComponent<Renderer>().material = shieldMatterials[activeShieldIndex];
+        turretRotator.GetComponent<Renderer>().material = shieldMatterials[activeShieldIndex];
+        turretBody.GetComponent<Renderer>().material = shieldMatterials[activeShieldIndex];
+    }
+
+    private void subtask_ChangeActiveIndex() {
+        if ((activeShieldIndex + 1) >= shieldColors.Length) { activeShieldIndex = 0; }
+        else { activeShieldIndex += 1; }
     }
 
 }

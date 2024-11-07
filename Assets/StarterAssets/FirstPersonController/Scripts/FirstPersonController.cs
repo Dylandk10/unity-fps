@@ -152,6 +152,7 @@ namespace StarterAssets {
 			_jumpTimeoutDelta = JumpTimeout;
 			_fallTimeoutDelta = FallTimeout;
 			activeShieldIndex = 0;
+			shield = shields[activeShieldIndex].GetComponent<Shield>();
 			currentHealth = Max_Health;
 			InitGuns();
         }
