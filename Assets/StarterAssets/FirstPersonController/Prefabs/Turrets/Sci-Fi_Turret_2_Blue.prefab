@@ -88,10 +88,14 @@ MonoBehaviour:
     type: 3}
   BulletSpawnPointOne: {fileID: 7831664324599498202}
   BulletSpawnPointTwo: {fileID: 4871512333540724134}
-  ImpactParticleSystem: {fileID: 9064919875212695174, guid: 4c12cf8aa358e944f80e357d85b88e35,
-    type: 3}
-  BulletTrail: {fileID: 328621789431213768, guid: 4313a91ac4504764aa536e75cd0daee5,
-    type: 3}
+  ImpactParticleSystem:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  BulletTrails:
+  - {fileID: 328621789431213768, guid: 4313a91ac4504764aa536e75cd0daee5, type: 3}
+  - {fileID: 328621789431213768, guid: 3d591935182f84544aedb480d08ace22, type: 3}
+  - {fileID: 328621789431213768, guid: 35e55a647a8d3e94e85e840a5b52d4a0, type: 3}
   ShootDelay: 1
   Mask:
     serializedVersion: 2

@@ -28,9 +28,13 @@ public class Turret : MonoBehaviour {
     [SerializeField]
     private Transform BulletSpawnPointTwo;
     [SerializeField]
-    private ParticleSystem ImpactParticleSystem;
+    private ParticleSystem[] ImpactParticleSystem;
+    private int activeBulletIndex;
+    private int lastTimeBulletChange;
+    private float bulletChangeDelay = 0.5f;
     [SerializeField]
-    private TrailRenderer BulletTrail;
+    private TrailRenderer[] BulletTrails;
+    private readonly string[] bulletColors = { "Red", "Blue", "Green" };
     [SerializeField]
     private float ShootDelay = 0.5f;
     [SerializeField]
@@ -53,6 +57,7 @@ public class Turret : MonoBehaviour {
 
     void Start() {
         activeShieldIndex = 0;
+        activeBulletIndex = 0;
     }
 
 
@@ -86,9 +91,14 @@ public class Turret : MonoBehaviour {
             ShootingSystem.Play();
             Vector3 direction = GetDirection();
             if (Physics.Raycast(turretHead.transform.position, direction, out RaycastHit hit, float.MaxValue, Mask)) {
+                bool didTakeDamage = false;
                 if (hit.transform.gameObject.CompareTag("Player")) {
-                    FirstPersonController.Instance.TakeDamage(5, "Red");
+                    didTakeDamage = FirstPersonController.Instance.TakeDamage(5, bulletColors[activeBulletIndex]);
                     ShootHit(hit);
+                }
+                //if turret misses change the bullet
+                if (!didTakeDamage && lastTimeBulletChange + bulletChangeDelay < Time.time) {
+                    ShouldChangeBulletColor();
                 }
             }
             // this has been updated to fix a commonly reported problem that you cannot fire if you would not hit anything
@@ -103,8 +113,8 @@ public class Turret : MonoBehaviour {
         BulletSpawnPointOne.transform.rotation = Quaternion.LookRotation(gunRotate);
         BulletSpawnPointTwo.transform.rotation = Quaternion.LookRotation(gunRotate);
 
-        TrailRenderer trail = Instantiate(BulletTrail, BulletSpawnPointOne.position, Quaternion.identity);
-        TrailRenderer trail2 = Instantiate(BulletTrail, BulletSpawnPointTwo.position, Quaternion.identity);
+        TrailRenderer trail = Instantiate(BulletTrails[activeBulletIndex], BulletSpawnPointOne.position, Quaternion.identity);
+        TrailRenderer trail2 = Instantiate(BulletTrails[activeBulletIndex], BulletSpawnPointTwo.position, Quaternion.identity);
 
         StartCoroutine(SpawnTrail(trail, hit.point, hit.normal, true));
         StartCoroutine(SpawnTrail(trail2, hit.point, hit.normal, true));//true here leaves hit mark if we hit tht turret don't give a hitmark
@@ -113,8 +123,8 @@ public class Turret : MonoBehaviour {
     }
 
     private void ShootMiss() {
-        TrailRenderer trail = Instantiate(BulletTrail, BulletSpawnPointOne.position, Quaternion.identity);
-        TrailRenderer trail2 = Instantiate(BulletTrail, BulletSpawnPointTwo.position, Quaternion.identity);
+        TrailRenderer trail = Instantiate(BulletTrails[activeBulletIndex], BulletSpawnPointOne.position, Quaternion.identity);
+        TrailRenderer trail2 = Instantiate(BulletTrails[activeBulletIndex], BulletSpawnPointTwo.position, Quaternion.identity);
 
         StartCoroutine(SpawnTrail(trail, BulletSpawnPointOne.position + GetDirection() * 100, Vector3.zero, false));
         StartCoroutine(SpawnTrail(trail2, BulletSpawnPointTwo.position + GetDirection() * 100, Vector3.zero, false));
@@ -181,17 +191,30 @@ public class Turret : MonoBehaviour {
         }
     }
 
+    private void ShouldChangeBulletColor() {
+        //add 20 to make fifty need to find better algo after
+        if (GetRandomNumber() < diffcultyDelta + 20) {
+            subtask_changeActiveBulletIndex();
+        }
+    }
+
     private void SwitchColors() {
-        subtask_ChangeActiveIndex();
+        subtask_ChangeActiveShieldIndex();
         turretHead.GetComponent<Renderer>().material = shieldMatterials[activeShieldIndex];
         turretBarel.GetComponent<Renderer>().material = shieldMatterials[activeShieldIndex];
         turretRotator.GetComponent<Renderer>().material = shieldMatterials[activeShieldIndex];
         turretBody.GetComponent<Renderer>().material = shieldMatterials[activeShieldIndex];
     }
 
-    private void subtask_ChangeActiveIndex() {
+    private void subtask_ChangeActiveShieldIndex() {
         if ((activeShieldIndex + 1) >= shieldColors.Length) { activeShieldIndex = 0; }
         else { activeShieldIndex += 1; }
     }
 
+    private void subtask_changeActiveBulletIndex() {
+        if ((activeBulletIndex + 1) >= BulletTrails.Length) { activeBulletIndex = 0; }
+        else {
+            activeBulletIndex += 1;
+        }
+    }
 }

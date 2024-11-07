@@ -413,12 +413,13 @@ namespace StarterAssets {
 			return currentHealth.ToString();
 		}
 
-		public void TakeDamage(int damage, string color) {
+		public bool TakeDamage(int damage, string color) {
 			if (shield.GetColor() == color) {
-				return;
+				return false;
 			}
 			currentHealth -= damage;
 			healthBar.SetHealth(currentHealth);
+			return true;
 		}
 
 		public void GiveMaxHealth() {
